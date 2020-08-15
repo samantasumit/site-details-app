@@ -37,13 +37,47 @@ export class SiteDetailsComponent implements OnInit {
 
   addNewSite() {
     const dialogRef = this.dialog.open(AddSiteDetailsDialogComponent, {
-      width: '250px',
-      data: {}
+      width: '640px',
+      data: {
+        subdomains: [{}]
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
+      this.addDomain(result);
     });
+  }
+
+  addDomain(dom) {
+    const id = new Date().getTime();
+    const domain = {
+      id: id,
+      domain: dom.domain,
+      storage: dom.storage,
+      usedStorage: 0,
+      avaialableDomains: 10,
+      domainTag: dom.domainTag,
+      usedDomains: 0,
+      monthlyVisitorCapacity: 1000,
+      monthlyVisitor: 0,
+      status: 'Active',
+      subdomains: []
+    };
+    dom.subdomains.forEach((subdom, index) => {
+      const subdomain = {
+        id: parseInt(id + '' + (index + 1)),
+        domain: subdom.domain,
+        usedStorage: 0,
+        domainTag: subdom.domainTag,
+        usedDomains: 0,
+        status: 'Active',
+        monthlyVisitor: subdom.monthlyVisitor
+      };
+      domain.subdomains.push(subdomain);
+    });
+    this.apiService.addDomain(domain);
+    this.getDomains();
   }
 
 }

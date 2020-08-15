@@ -1,12 +1,66 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field>
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="data.animal">
-  </mat-form-field>
+<h1 mat-dialog-title class="text">Add Domain Details</h1>
+<div mat-dialog-content class="text">
+  <div class="fields">
+    <mat-form-field>
+      <mat-label>Domain Name*</mat-label>
+      <input matInput [(ngModel)]="data.domain">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Domain Tag</mat-label>
+      <mat-select [(ngModel)]="data.domainTag">
+        <mat-option value="Primary">
+          Primary
+        </mat-option>
+        <mat-option value="Staging">
+          Staging
+        </mat-option>
+        <mat-option value="Add-on">
+          Add-on
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="fields">
+    <mat-form-field>
+      <mat-label>Storage*</mat-label>
+      <input matInput type="number" min="0" [(ngModel)]="data.storage">
+    </mat-form-field>
+  </div>
+  <ng-container *ngFor="let subdomain of data?.subdomains; let i = index;">
+    <div class="fields">
+      <mat-form-field>
+        <mat-label>Subdomain</mat-label>
+        <input matInput [(ngModel)]="subdomain.domain">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Subdomain Tag</mat-label>
+        <mat-select [(ngModel)]="subdomain.domainTag">
+          <mat-option value="Primary">
+            Primary
+          </mat-option>
+          <mat-option value="Staging">
+            Staging
+          </mat-option>
+          <mat-option value="Add-on">
+            Add-on
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span (click)="removeSubdomain(i, data)" class="material-icons close">
+        close
+      </span>
+    </div>
+    <div class="fields">
+      <mat-form-field>
+        <mat-label>Monthly Visitor</mat-label>
+        <input matInput type="number" min="0" [(ngModel)]="subdomain.monthlyVisitor">
+      </mat-form-field>
+    </div>
+  </ng-container>
+  <button mat-button (click)="addSubdomain(data)">Add More</button>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+<div mat-dialog-actions class="actions">
+  <button mat-button (click)="close()">Close</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial color="primary" [disabled]="!isDataValid(data)">Save
+    Changes</button>
 </div>

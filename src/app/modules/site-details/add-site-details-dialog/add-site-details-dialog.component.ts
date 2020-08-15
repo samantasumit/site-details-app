@@ -10,9 +10,36 @@ export class AddSiteDetailsDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<AddSiteDetailsDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data) {}
+    @Inject(MAT_DIALOG_DATA) public data) { }
 
-  onNoClick(): void {
+  addSubdomain(data) {
+    if (data && data.subdomains && Array.isArray(data.subdomains)) {
+      data.subdomains.push({});
+    } else {
+      data.subdomains = [{}];
+    }
+  }
+
+  removeSubdomain(index, data) {
+    data.subdomains.splice(index, 1);
+  }
+
+  isDataValid(data) {
+    console.log(data)
+    if (!data.domain || !data.domainTag || data.storage === null || data.storage === undefined) {
+      return false;
+    }
+    if (data && data.subdomains && Array.isArray(data.subdomains)) {
+      for (let i = 0; i < data.subdomains.length; i++) {
+        if (!data.subdomains[i].domain || !data.subdomains[i].domainTag || data.subdomains[i].monthlyVisitor === null || data.subdomains[i].monthlyVisitor === undefined) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  close(): void {
     this.dialogRef.close();
   }
 

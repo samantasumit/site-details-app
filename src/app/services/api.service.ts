@@ -6,6 +6,11 @@ import { Injectable } from '@angular/core';
 export class ApiService {
 
   domains = [];
+  userDetail = {
+    name: 'John Doe',
+    email: 'emailaddress@email.com',
+    profileImage: 'https://fuguchat.s3.ap-south-1.amazonaws.com/production/34954/image/e4DBtyuvWB_1596093394729.png'
+  };
 
   constructor() { 
     this.domains = [{
@@ -74,7 +79,15 @@ export class ApiService {
     }];
   }
 
+  getUserDeatils() {
+    return this.userDetail;
+  }
+
   getDomains() {
     return this.domains;
+  }
+
+  addDomain(domain) {
+    this.domains.push(domain);
   }
 }

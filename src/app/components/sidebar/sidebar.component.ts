@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/services/app.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,13 +10,12 @@ import { AppService } from 'src/app/services/app.service';
 export class SidebarComponent implements OnInit {
 
   routes = [];
-  userDetail = {
-    name: 'John Doe',
-    email: 'emailaddress@eamil.com',
-    profileImage: 'https://fuguchat.s3.ap-south-1.amazonaws.com/production/34954/image/e4DBtyuvWB_1596093394729.png'
-  };
+  userDetail;
 
-  constructor(public appService: AppService) { }
+  constructor(public appService: AppService,
+    public apiService: ApiService) {
+      this.userDetail = this.apiService.getUserDeatils();
+   }
 
   ngOnInit() {
     this.routes = [{
