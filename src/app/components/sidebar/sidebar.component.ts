@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,9 +15,7 @@ export class SidebarComponent implements OnInit {
     profileImage: 'https://fuguchat.s3.ap-south-1.amazonaws.com/production/34954/image/e4DBtyuvWB_1596093394729.png'
   };
 
-  constructor() {
-    
-  }
+  constructor(public appService: AppService) { }
 
   ngOnInit() {
     this.routes = [{

@@ -1,6 +1,9 @@
 <div class="app-component">
   <div class="site-section">
-    <div class="site-sidebar">
+    <span (click)="appService.toggleSidebar()" class="material-icons expand-collapse">
+      {{ appService.isSidebarExpanded ? 'close' : 'menu' }}
+    </span>
+    <div class="site-sidebar" [ngClass]="{ 'expand' : appService.isSidebarExpanded }">
       <app-sidebar></app-sidebar>
     </div>
     <div class="site-main">
