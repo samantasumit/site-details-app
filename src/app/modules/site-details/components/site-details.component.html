@@ -30,6 +30,13 @@
                 </div>
                 <div class="h-column">
                     Storage
+                    <span (click)="changeSort()" class="material-icons sort">
+                        <span [ngSwitch]="sortType">
+                            <ng-container *ngSwitchCase="sortTypes[0]">unfold_more</ng-container>
+                            <ng-container *ngSwitchCase="sortTypes[1]">keyboard_arrow_up</ng-container>
+                            <ng-container *ngSwitchCase="sortTypes[2]">keyboard_arrow_down</ng-container>
+                        </span>
+                    </span>
                 </div>
                 <div class="h-column">
                     Monthly Visitor
@@ -42,7 +49,7 @@
                 </div>
             </div>
             <div class="domain-outer">
-                <ng-container *ngFor="let domain of domains | searchText:searchText:'domain':'status' | slice:0:pageSize">
+                <ng-container *ngFor="let domain of domains | searchText:searchText:'domain' | slice:0:pageSize | orderBy:sortType:'usedStorage':'storage'">
                     <div class="domain" [ngClass]="{ 'has-children' : domain?.subdomains?.length }">
                         <div class="d-column">
                             <div>
@@ -104,7 +111,7 @@
                         </div>
 
                     </div>
-                    <ng-container *ngFor="let subdomain of domain?.subdomains | searchText:searchText:'domain':'status'">
+                    <ng-container *ngFor="let subdomain of domain?.subdomains | searchText:searchText:'domain'">
                         <div class="domain subdomain">
                             <div class="d-column">
                                 <div>
@@ -125,7 +132,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                             <div class="d-column">
@@ -140,7 +147,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                             <div class="d-column">
@@ -165,7 +172,8 @@
                         </div>
                     </ng-container>
                 </ng-container>
-                <ng-container *ngIf="!domains || (domains | searchText:searchText:'domain':'status')?.length == 0" class="domain">
+                <ng-container *ngIf="!domains || (domains | searchText:searchText:'domain')?.length == 0"
+                    class="domain">
                     <p class="text-center light">
                         No records found.
                     </p>

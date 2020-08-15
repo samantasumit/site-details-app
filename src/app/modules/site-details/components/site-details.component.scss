@@ -43,6 +43,9 @@
                     align-items: center;
                     color: #a1a8b8;
                     font-weight: 500;
+                    .sort {
+                        cursor: pointer;
+                    }
                 }
             }
             .domain-outer {

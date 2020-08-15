@@ -15,9 +15,9 @@ export class ApiService {
   constructor() { 
     this.domains = [{
       id: 1,
-      domain: 'xyz.com',
+      domain: 'asxyz.com',
       storage: 100,
-      usedStorage: 50,
+      usedStorage: 30,
       avaialableDomains: 10,
       domainTag: 'Primary',
       usedDomains: 4,
@@ -25,7 +25,7 @@ export class ApiService {
       monthlyVisitor: 100,
       subdomains: [{
         id: 11,
-        domain: 'xyz.com',
+        domain: 'nbmbn.com',
         usedStorage: 50,
         domainTag: 'Primary',
         usedDomains: 4,
@@ -33,7 +33,7 @@ export class ApiService {
         monthlyVisitor: 100
       }, {
         id: 12,
-        domain: 'xyz.com',
+        domain: 'asxssfyz.com',
         usedStorage: 50,
         domainTag: 'Staging',
         usedDomains: 4,
@@ -42,9 +42,9 @@ export class ApiService {
       }]
     }, {
       id: 2,
-      domain: 'xyz.com',
+      domain: 'cvx.com',
       storage: 100,
-      usedStorage: 50,
+      usedStorage: 90,
       avaialableDomains: 10,
       domainTag: 'Primary',
       usedDomains: 4,
@@ -54,9 +54,9 @@ export class ApiService {
       subdomains: []
     }, {
       id: 3,
-      domain: 'xyz.com',
+      domain: 'yui.com',
       storage: 100,
-      usedStorage: 50,
+      usedStorage: 70,
       avaialableDomains: 10,
       domainTag: 'Primary',
       usedDomains: 4,
@@ -68,7 +68,7 @@ export class ApiService {
       id: 4,
       domain: 'xyz.com',
       storage: 100,
-      usedStorage: 50,
+      usedStorage: 10,
       avaialableDomains: 10,
       domainTag: 'Primary',
       usedDomains: 4,

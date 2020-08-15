@@ -46,15 +46,15 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <span (click)="removeSubdomain(i, data)" class="material-icons close">
-        close
-      </span>
     </div>
     <div class="fields">
       <mat-form-field>
         <mat-label>Monthly Visitor</mat-label>
         <input matInput type="number" min="0" [(ngModel)]="subdomain.monthlyVisitor">
       </mat-form-field>
+      <span (click)="removeSubdomain(i, data)" class="material-icons close">
+        close
+      </span>
     </div>
   </ng-container>
   <button mat-button (click)="addSubdomain(data)">Add More</button>

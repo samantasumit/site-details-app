@@ -14,14 +14,21 @@ export class SiteDetailsComponent implements OnInit {
   domains = [];
   pageSize;
   searchText;
+  sortTypes = [0, 1, 2];
+  sortType;
 
   constructor(public dialog: MatDialog,
     public apiService: ApiService) {
     this.pageSize = this.pageSizes[0];
+    this.sortType = this.sortTypes[0];
   }
 
   ngOnInit() {
     this.getDomains();
+  }
+
+  changeSort() {
+    this.sortType = (this.sortType + 1) % 3;
   }
 
   getDomains() {

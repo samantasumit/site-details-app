@@ -10,12 +10,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { SiteDetailsRoutingModule } from './site-details-routing.module';
 import { SearchTextPipe } from 'src/app/pipes/search-text.pipe';
+import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
 
 @NgModule({
   declarations: [
     SiteDetailsComponent,
     AddSiteDetailsDialogComponent,
-    SearchTextPipe
+    SearchTextPipe,
+    OrderByPipe
   ],
   imports: [
     CommonModule,
