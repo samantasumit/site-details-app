@@ -1,23 +1,23 @@
 <div class="site-details">
     <div class="head">
-        <h3 class="heading">Site Details</h3>
-        <button mat-button color="primary" class="add-site-btn" (click)="addNewSite()">Site Details</button>
+        <h2 class="heading">Site Details</h2>
+        <button mat-button color="primary" class="add-site-btn" (click)="addNewSite()">+ Add New Site</button>
     </div>
     <div class="content">
         <div class="controls">
             <div class="amount">
                 Show
-                <mat-form-field appearance="fill">
+                <mat-form-field class="mat-form-field-cust">
                     <mat-select [(ngModel)]="pageSize">
                         <mat-option *ngFor="let pageSize of pageSizes" [value]="pageSize">
                             {{pageSize}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                Enteries
+                Entries
             </div>
             <div class="search">
-                <mat-form-field class="search-width">
+                <mat-form-field>
                     <mat-icon matPrefix>search</mat-icon>
                     <input matInput placeholder="Search records" [(ngModel)]="searchText">
                 </mat-form-field>

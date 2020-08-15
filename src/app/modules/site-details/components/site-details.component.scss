@@ -8,12 +8,27 @@
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
+        margin-bottom: 15px;
+        .heading {
+            font-weight: 500;
+            margin-top: 0;
+            color: #232d42;
+        }
     }
     .content {
         .controls {
             display: flex;
             align-items: center;
             flex-wrap: wrap;
+            margin-bottom: 15px;
+            color: #3d4659;
+            font-size: small;
+            .amount {
+                padding-right: 30px;
+            }
+            .mat-form-field-cust {
+                width: 80px;
+            }
         }
         .data-table {
             width: 100%;
@@ -61,6 +76,7 @@
                     font-weight: 400;
                     .d-tag {
                         color: #bdc2cf;
+                        font-size: small;
                     }
                     .storage {
                         font-size: small;
@@ -90,8 +106,8 @@
                             color: #e177dd;
                         }
                         &.addon {
-                            background-color: #ffe5dd;
-                            color: #ff7f57;
+                            background-color: #f7eee3;
+                            color: #f7b95a;
                         }
                     }
                     .progress {
