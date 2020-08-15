@@ -1,0 +1,13 @@
+.no-routes {
+    padding: 30px;
+    background-color: #e7eef7;
+    min-height: 100vh;
+    .meassage {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .light {
+        color: #a1a8b8;
+    }
+}

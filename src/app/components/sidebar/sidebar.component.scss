@@ -1,0 +1,110 @@
+.text-center {
+    text-align: center;
+}
+.light {
+    opacity: 0.5;
+}
+.sidebar {
+    min-height: 100vh;
+    background-color: #5b7bfd;
+    color: #ffffff;
+    .profile {
+        padding: 30px 15px;
+        .image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .avatar {
+                height: 75px;
+                width: 75px;
+                border-radius: 50%;
+                background-size: cover;
+                background-position: center;
+            }
+        }
+        .name {
+            padding-top: 15px;
+            padding-bottom: 5px;
+            text-align: center;
+            color: #f3f5fe;
+            font-size: 15px;
+        }
+        .email {
+            text-align: center;
+            font-size: 13px;
+            color: #a2b4fe;
+        }
+    }
+    .routes {
+        .route {
+            min-height: 50px;
+            padding: 0 15px;
+            padding-left: 50px;
+            display: flex;
+            align-items: center;
+            .icon {
+                width: 20px;
+                padding-right: 5px;
+                .logo {
+                    display: flex;
+                    align-items: center;
+                    svg {
+                        height: 100%;
+                        width: 100%;
+                        >path {
+                            fill: #a0b3ff;
+                        }
+                        >g {
+                            path {
+                                stroke:#a0b3ff;
+                            }
+                        }
+                    }
+                }
+            }
+            .link {
+                cursor: pointer;
+                transition: ease 0.25s;
+                color: #a0b3ff;
+                outline: none;
+                box-shadow: none;
+                &:hover {
+                    text-decoration: underline;
+                    color: #d9e0fc;
+                }
+            }
+            &.activated {
+                background-color: #5273f0;
+                .link {
+                    color: #d9e0fc;
+                }
+                .icon {
+                    svg {
+                        path {
+                            fill: #d9e0fc;
+                        }
+                        >g {
+                            path {
+                                stroke:#d9e0fc;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+:host .logo {
+    svg {
+        height: 100%;
+        width: 100%;
+        >path {
+            fill: #a0b3ff;
+        }
+        >g {
+            path {
+                stroke:#a0b3ff;
+            }
+        }
+    }
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddSiteDetailsDialogComponent } from '../add-site-details-dialog/add-site-details-dialog.component';
-import { ApiService } from '../services/api.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-site-details',

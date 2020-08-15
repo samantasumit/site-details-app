@@ -1,0 +1,23 @@
+<div class="sidebar">
+    <div class="profile">
+        <div class="image">
+            <div class="avatar"
+                [ngStyle]="{ 'background-image': 'url(' + (userDetail?.profileImage || 'https://t4.ftcdn.net/jpg/00/64/67/63/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg') + ')' }">
+            </div>
+        </div>
+        <div class="name">
+            {{userDetail?.name}}
+        </div>
+        <div class="email">
+            {{userDetail?.email}}
+        </div>
+    </div>
+    <div class="routes">
+        <ng-container *ngFor="let route of routes;">
+            <div class="route" routerLinkActive="activated">
+                <div class="icon"><span class="logo" [innerHTML]="route.icon | safeHtml"></span></div>
+                <div class="link" [routerLink]="route.path">{{ route.label }}</div>
+            </div>
+        </ng-container>
+    </div>
+</div>
