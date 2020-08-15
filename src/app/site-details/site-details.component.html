@@ -1,0 +1,176 @@
+<div class="site-details">
+    <div class="head">
+        <h3 class="heading">Site Details</h3>
+        <button mat-button color="primary" class="add-site-btn" (click)="addNewSite()">Site Details</button>
+    </div>
+    <div class="content">
+        <div class="controls">
+            <div class="amount">
+                Show
+                <mat-form-field appearance="fill">
+                    <mat-select [(ngModel)]="pageSize">
+                        <mat-option *ngFor="let pageSize of pageSizes" [value]="pageSize">
+                            {{pageSize}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                Enteries
+            </div>
+            <div class="search">
+                <mat-form-field class="search-width">
+                    <mat-icon matPrefix>search</mat-icon>
+                    <input matInput placeholder="Search records" [(ngModel)]="searchText">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="data-table">
+            <div class="heading">
+                <div class="h-column">
+                    Domain & Plan Name
+                </div>
+                <div class="h-column">
+                    Storage
+                </div>
+                <div class="h-column">
+                    Monthly Visitor
+                </div>
+                <div class="h-column">
+                    Domains
+                </div>
+                <div class="h-column">
+                    Status
+                </div>
+            </div>
+            <div class="domain-outer">
+                <ng-container *ngFor="let domain of domains | searchText:searchText:'domain':'status' | slice:0:pageSize">
+                    <div class="domain" [ngClass]="{ 'has-children' : domain?.subdomains?.length }">
+                        <div class="d-column">
+                            <div>
+                                <div class="d-name">
+                                    {{domain?.domain}}
+                                </div>
+                                <div class="d-tag">
+                                    {{domain?.domainTag}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-column">
+                            <div>
+                                <div class="progress">
+                                    <div class="progress-bar">
+                                        <div class="active-bar"
+                                            [ngStyle]="{ 'width' : (domain.usedStorage/domain.storage*100) + 'px' }">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="storage">
+                                    {{ domain.usedStorage }} of {{ domain.storage }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-column">
+                            <div>
+                                <div class="progress">
+                                    <div class="progress-bar">
+                                        <div class="active-bar"
+                                            [ngStyle]="{ 'width' : (domain.monthlyVisitor/domain.monthlyVisitorCapacity*100) + 'px' }">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="storage">
+                                    {{ domain.monthlyVisitor }} of {{ domain.monthlyVisitorCapacity }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-column">
+                            <div>
+                                <div class="progress">
+                                    <div class="progress-round">
+                                        <div class="d-count">
+                                            {{ domain.usedDomains }} / {{ domain.avaialableDomains }}
+                                        </div>
+                                        <!-- <div class="active-round"
+                                    [ngStyle]="{ 'clip' : (domain.usedDomains/domain.avaialableDomains*100) + 'px' }"></div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-column">
+                            <div *ngIf="domain.status"
+                                [ngClass]="{ 'active': domain.status == 'Active', 'inactive': domain.status != 'Active' }"
+                                class="status">
+                                {{ domain.status }}
+                            </div>
+                        </div>
+
+                    </div>
+                    <ng-container *ngFor="let subdomain of domain?.subdomains | searchText:searchText:'domain':'status'">
+                        <div class="domain subdomain">
+                            <div class="d-column">
+                                <div>
+                                    <div class="d-name">
+                                        {{subdomain?.domain}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-column">
+                                <div class="d-flex align-center">
+                                    <div class="storage">
+                                        {{ subdomain.usedStorage }}
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar">
+                                            <div class="active-bar"
+                                                [ngStyle]="{ 'width' : (subdomain.usedStorage/subdomain.storage*100) + 'px' }">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="d-column">
+                                <div class="d-flex align-center">
+                                    <div class="storage">
+                                        {{ subdomain.monthlyVisitor }}
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar">
+                                            <div class="active-bar"
+                                                [ngStyle]="{ 'width' : (subdomain.monthlyVisitor/subdomain.monthlyVisitorCapacity*100) + 'px' }">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="d-column">
+                                <div *ngIf="subdomain.domainTag"
+                                    [ngClass]="{ 'staging': subdomain.domainTag == 'Staging', 'addon': subdomain.domainTag == 'Add-on', 'primary': subdomain.domainTag == 'Primary' }"
+                                    class="status">
+                                    {{ subdomain.domainTag }}
+                                </div>
+                            </div>
+                            <div class="d-column">
+                                <div *ngIf="subdomain.status"
+                                    [ngClass]="{ 'active': subdomain.status == 'Active', 'inactive': subdomain.status != 'Active' }"
+                                    class="status">
+                                    {{ subdomain.status }}
+                                </div>
+                                <!-- <div *ngIf="domain.status"
+                                    [ngClass]="{ 'active': domain.status == 'Active', 'inactive': domain.status != 'Active' }"
+                                    class="status">
+                                    {{ domain.status }}
+                                </div> -->
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+                <ng-container *ngIf="!domains || (domains | searchText:searchText:'domain':'status')?.length == 0" class="domain">
+                    <p class="text-center light">
+                        No records found.
+                    </p>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
