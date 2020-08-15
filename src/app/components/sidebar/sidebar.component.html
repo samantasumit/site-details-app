@@ -15,7 +15,7 @@
     <div class="routes">
         <ng-container *ngFor="let route of routes;">
             <div class="route" routerLinkActive="activated" (click)="appService.closeSidebar()">
-                <div class="icon"><span class="logo" [innerHTML]="route.icon | safeHtml"></span></div>
+                <div class="icon"><span class="logo" [innerHTML]="route.icon | safeHtml:'html'"></span></div>
                 <div class="link" [routerLink]="route.path">{{ route.label }}</div>
             </div>
         </ng-container>
