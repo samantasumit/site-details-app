@@ -49,7 +49,8 @@
                 </div>
             </div>
             <div class="domain-outer">
-                <ng-container *ngFor="let domain of domains | searchText:searchText:'domain' | slice:0:pageSize | orderBy:sortType:'usedStorage':'storage'">
+                <ng-container
+                    *ngFor="let domain of domains | searchText:searchText:'domain' | slice:0:pageSize | orderBy:sortType:'usedStorage':'storage'">
                     <div class="domain" [ngClass]="{ 'has-children' : domain?.subdomains?.length }">
                         <div class="d-column">
                             <div>
@@ -58,8 +59,8 @@
                                 </div>
                                 <div class="d-tag">
                                     <span class="material-icons icon">
-                                       done
-                                      </span> {{domain?.domainTag}}
+                                        done
+                                    </span> {{domain?.domainTag}}
                                 </div>
                             </div>
                         </div>
@@ -98,9 +99,13 @@
                                         <div class="d-count">
                                             {{ domain.usedDomains }} / {{ domain.avaialableDomains }}
                                         </div>
-                                        <!-- <div class="active-round"
-                                    [ngStyle]="{ 'clip' : (domain.usedDomains/domain.avaialableDomains*100) + 'px' }"></div> -->
                                     </div>
+                                    <svg class="progress-ring" width="58" height="58">
+                                        <circle class="progress-ring__circle" stroke="#6685fd" stroke-width="4"
+                                            [attr.stroke-dasharray]="getStrokeDasharray()"
+                                            [attr.style]="getStrokeDashoffset(domain.usedDomains, domain.avaialableDomains)"
+                                            fill="transparent" r="27" cx="29" cy="29" />
+                                    </svg>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +118,8 @@
                         </div>
 
                     </div>
-                    <ng-container *ngFor="let subdomain of domain?.subdomains | searchText:searchText:'domain'; let i = index">
+                    <ng-container
+                        *ngFor="let subdomain of domain?.subdomains | searchText:searchText:'domain'; let i = index">
                         <div class="domain subdomain" [ngClass]="{ 'is-last' : i == domain?.subdomains?.length - 1 }">
                             <div class="d-column">
                                 <div>
@@ -128,7 +134,8 @@
                                         {{ subdomain.usedStorage }} GB
                                     </div>
                                     <div class="progress">
-                                        <div class="progress-bar progress-bar-sml" [ngClass]="{ 'staging': subdomain.domainTag == domainTagTypeEnum.STAGING, 'addon': subdomain.domainTag == domainTagTypeEnum.ADDON, 'primary': subdomain.domainTag == domainTagTypeEnum.PRIMARY }">
+                                        <div class="progress-bar progress-bar-sml"
+                                            [ngClass]="{ 'staging': subdomain.domainTag == domainTagTypeEnum.STAGING, 'addon': subdomain.domainTag == domainTagTypeEnum.ADDON, 'primary': subdomain.domainTag == domainTagTypeEnum.PRIMARY }">
                                             <!-- <div class="active-bar"
                                                 [ngStyle]="{ 'width' : (subdomain.usedStorage/subdomain.storage*100) + 'px' }">
                                             </div> -->
@@ -143,7 +150,8 @@
                                         {{ subdomain.monthlyVisitor }}
                                     </div>
                                     <div class="progress">
-                                        <div class="progress-bar progress-bar-sml" [ngClass]="{ 'staging': subdomain.domainTag == domainTagTypeEnum.STAGING, 'addon': subdomain.domainTag == domainTagTypeEnum.ADDON, 'primary': subdomain.domainTag == domainTagTypeEnum.PRIMARY }">
+                                        <div class="progress-bar progress-bar-sml"
+                                            [ngClass]="{ 'staging': subdomain.domainTag == domainTagTypeEnum.STAGING, 'addon': subdomain.domainTag == domainTagTypeEnum.ADDON, 'primary': subdomain.domainTag == domainTagTypeEnum.PRIMARY }">
                                             <!-- <div class="active-bar"
                                                 [ngStyle]="{ 'width' : (subdomain.monthlyVisitor/subdomain.monthlyVisitorCapacity*100) + 'px' }">
                                             </div> -->

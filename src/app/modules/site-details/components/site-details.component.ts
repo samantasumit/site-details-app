@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddSiteDetailsDialogComponent } from '../add-site-details-dialog/add-site-details-dialog.component';
 import { ApiService } from 'src/app/services/api.service';
 import { domainTagType, statusType } from 'src/app/enum/app.enum';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-site-details',
@@ -22,7 +23,8 @@ export class SiteDetailsComponent implements OnInit {
   statusTypeEnum = statusType;
 
   constructor(public dialog: MatDialog,
-    public apiService: ApiService) {
+    public apiService: ApiService,
+    private sanitizer: DomSanitizer) {
     this.pageSize = this.pageSizes[0];
     this.sortType = this.sortTypes[0];
   }
@@ -71,6 +73,17 @@ export class SiteDetailsComponent implements OnInit {
         this.addDomain(result);
       }
     });
+  }
+
+  getStrokeDasharray() {
+    const _circumference = 27 * 2 * Math.PI;
+    return `${_circumference}, ${_circumference}`;
+  }
+
+  getStrokeDashoffset(dividend, divisor) {
+    const _circumference = 27 * 2 * Math.PI;
+    const offset = _circumference - ((dividend / divisor) * _circumference);
+    return this.sanitizer.bypassSecurityTrustStyle(`stroke-dashoffset:${offset}`);
   }
 
   addDomain(dom) {
