@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { domainTagType } from 'src/app/enum/app.enum';
 
 @Component({
   selector: 'app-add-site-details-dialog',
@@ -8,6 +9,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class AddSiteDetailsDialogComponent {
 
+  domainTagTypeEnum = domainTagType;
+  
   constructor(
     public dialogRef: MatDialogRef<AddSiteDetailsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data) { }
@@ -25,7 +28,6 @@ export class AddSiteDetailsDialogComponent {
   }
 
   isDataValid(data) {
-    console.log(data)
     if (!data.domain || !data.domainTag || data.storage === null || data.storage === undefined) {
       return false;
     }

@@ -12,6 +12,7 @@ import { SupportComponent } from './components/support/support.component';
 import { TicketComponent } from './components/ticket/ticket.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

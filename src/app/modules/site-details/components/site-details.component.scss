@@ -55,7 +55,7 @@
                     background-color: #ffffff;
                     border-radius: 10px;
                     margin: 15px 0;
-                    // box-shadow: 0 10px 26px 0 rgba(110, 110, 110, 0.1);
+                    box-shadow: 0 2px 2px 0 rgba(0,0,0,.04);
                     &.has-children {
                         border-bottom-left-radius: 0;
                         border-bottom-right-radius: 0;
@@ -64,9 +64,9 @@
                         margin-top: -15px;
                         border-radius: 0px;
                         background-color: #f5f6fa;
-                        &:last-child {
+                        &:last-child, &.is-last {
                             border-bottom-left-radius: 10px;
-                            border-bottom-right-radius: 0px;
+                            border-bottom-right-radius: 10px;
                         }
                     }
                 }
@@ -80,9 +80,21 @@
                     .d-tag {
                         color: #bdc2cf;
                         font-size: small;
+                        display: flex;
+                        align-items: center;
+                        padding-top: 4px;
+                        .icon {
+                            font-size: small;
+                            color: #45cac8;
+                        }
                     }
-                    .storage {
+                    .storage, .users {
                         font-size: small;
+                        padding-top: 5px;
+                        &.stg-inl, &.usr-inl {
+                            padding-top: 0;
+                            padding-right: 5px;
+                        }
                     }
                     .status {
                         border-radius: 5px;
@@ -129,6 +141,19 @@
                                 width: 0;
                                 height: 100%;
                                 background-color: #3ac879;
+                            }
+                            &.progress-bar-sml {
+                                width: 12px;
+                                background-color: #3ac879;
+                                &.primary {
+                                    background-color: #7f99fd;
+                                }
+                                &.staging {
+                                    background-color: #e177dd;
+                                }
+                                &.addon {
+                                    background-color: #f7b95a;
+                                }
                             }
                         }
                         .progress-round {

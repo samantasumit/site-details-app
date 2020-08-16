@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddSiteDetailsDialogComponent } from '../add-site-details-dialog/add-site-details-dialog.component';
 import { ApiService } from 'src/app/services/api.service';
+import { domainTagType, statusType } from 'src/app/enum/app.enum';
 
 @Component({
   selector: 'app-site-details',
@@ -16,6 +17,9 @@ export class SiteDetailsComponent implements OnInit {
   searchText;
   sortTypes = [0, 1, 2];
   sortType;
+  isLoading: boolean;
+  domainTagTypeEnum = domainTagType;
+  statusTypeEnum = statusType;
 
   constructor(public dialog: MatDialog,
     public apiService: ApiService) {
@@ -32,8 +36,17 @@ export class SiteDetailsComponent implements OnInit {
   }
 
   getDomains() {
-    this.domains = this.apiService.getDomains();
-    this.calculatedPageSize();
+    this.isLoading = true;
+    this.apiService.getDomains().then((response) => {
+      this.isLoading = false;
+      if (Array.isArray(response)) {
+        this.domains = response;
+      }
+      this.calculatedPageSize();
+    }).catch((error) => {
+      this.isLoading = false;
+      console.log('Error: ', error);
+    });
   }
 
   calculatedPageSize() {
@@ -46,13 +59,17 @@ export class SiteDetailsComponent implements OnInit {
     const dialogRef = this.dialog.open(AddSiteDetailsDialogComponent, {
       width: '640px',
       data: {
-        subdomains: [{}]
+        domainTag: domainTagType.PRIMARY,
+        subdomains: [{
+          domainTag: domainTagType.PRIMARY
+        }]
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
-      this.addDomain(result);
+      if (result) {
+        this.addDomain(result);
+      }
     });
   }
 
@@ -68,7 +85,7 @@ export class SiteDetailsComponent implements OnInit {
       usedDomains: 0,
       monthlyVisitorCapacity: 1000,
       monthlyVisitor: 0,
-      status: 'Active',
+      status: statusType.Active,
       subdomains: []
     };
     dom.subdomains.forEach((subdom, index) => {
@@ -78,13 +95,16 @@ export class SiteDetailsComponent implements OnInit {
         usedStorage: 0,
         domainTag: subdom.domainTag,
         usedDomains: 0,
-        status: 'Active',
+        status: statusType.Active,
         monthlyVisitor: subdom.monthlyVisitor
       };
       domain.subdomains.push(subdomain);
     });
-    this.apiService.addDomain(domain);
-    this.getDomains();
+    this.apiService.addDomain(domain).then((response) => {
+      this.getDomains();
+    }).catch((error) => {
+      console.log('Error: ', error);
+    });
   }
 
 }

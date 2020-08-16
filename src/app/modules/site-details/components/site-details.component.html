@@ -57,7 +57,9 @@
                                     {{domain?.domain}}
                                 </div>
                                 <div class="d-tag">
-                                    {{domain?.domainTag}}
+                                    <span class="material-icons icon">
+                                       done
+                                      </span> {{domain?.domainTag}}
                                 </div>
                             </div>
                         </div>
@@ -71,7 +73,7 @@
                                     </div>
                                 </div>
                                 <div class="storage">
-                                    {{ domain.usedStorage }} of {{ domain.storage }}
+                                    {{ domain.usedStorage }} GB of {{ domain.storage }} GB
                                 </div>
                             </div>
                         </div>
@@ -84,7 +86,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="storage">
+                                <div class="users">
                                     {{ domain.monthlyVisitor }} of {{ domain.monthlyVisitorCapacity }}
                                 </div>
                             </div>
@@ -104,15 +106,15 @@
                         </div>
                         <div class="d-column">
                             <div *ngIf="domain.status"
-                                [ngClass]="{ 'active': domain.status == 'Active', 'inactive': domain.status != 'Active' }"
+                                [ngClass]="{ 'active': domain.status == statusTypeEnum.Active, 'inactive': domain.status == statusTypeEnum.Inactive }"
                                 class="status">
                                 {{ domain.status }}
                             </div>
                         </div>
 
                     </div>
-                    <ng-container *ngFor="let subdomain of domain?.subdomains | searchText:searchText:'domain'">
-                        <div class="domain subdomain">
+                    <ng-container *ngFor="let subdomain of domain?.subdomains | searchText:searchText:'domain'; let i = index">
+                        <div class="domain subdomain" [ngClass]="{ 'is-last' : i == domain?.subdomains?.length - 1 }">
                             <div class="d-column">
                                 <div>
                                     <div class="d-name">
@@ -122,14 +124,14 @@
                             </div>
                             <div class="d-column">
                                 <div class="d-flex align-center">
-                                    <div class="storage">
-                                        {{ subdomain.usedStorage }}
+                                    <div class="storage stg-inl">
+                                        {{ subdomain.usedStorage }} GB
                                     </div>
                                     <div class="progress">
-                                        <div class="progress-bar">
-                                            <div class="active-bar"
+                                        <div class="progress-bar progress-bar-sml" [ngClass]="{ 'staging': subdomain.domainTag == domainTagTypeEnum.STAGING, 'addon': subdomain.domainTag == domainTagTypeEnum.ADDON, 'primary': subdomain.domainTag == domainTagTypeEnum.PRIMARY }">
+                                            <!-- <div class="active-bar"
                                                 [ngStyle]="{ 'width' : (subdomain.usedStorage/subdomain.storage*100) + 'px' }">
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
 
@@ -137,14 +139,14 @@
                             </div>
                             <div class="d-column">
                                 <div class="d-flex align-center">
-                                    <div class="storage">
+                                    <div class="users usr-inl">
                                         {{ subdomain.monthlyVisitor }}
                                     </div>
                                     <div class="progress">
-                                        <div class="progress-bar">
-                                            <div class="active-bar"
+                                        <div class="progress-bar progress-bar-sml" [ngClass]="{ 'staging': subdomain.domainTag == domainTagTypeEnum.STAGING, 'addon': subdomain.domainTag == domainTagTypeEnum.ADDON, 'primary': subdomain.domainTag == domainTagTypeEnum.PRIMARY }">
+                                            <!-- <div class="active-bar"
                                                 [ngStyle]="{ 'width' : (subdomain.monthlyVisitor/subdomain.monthlyVisitorCapacity*100) + 'px' }">
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
 
@@ -152,19 +154,19 @@
                             </div>
                             <div class="d-column">
                                 <div *ngIf="subdomain.domainTag"
-                                    [ngClass]="{ 'staging': subdomain.domainTag == 'Staging', 'addon': subdomain.domainTag == 'Add-on', 'primary': subdomain.domainTag == 'Primary' }"
+                                    [ngClass]="{ 'staging': subdomain.domainTag == domainTagTypeEnum.STAGING, 'addon': subdomain.domainTag == domainTagTypeEnum.ADDON, 'primary': subdomain.domainTag == domainTagTypeEnum.PRIMARY }"
                                     class="status">
                                     {{ subdomain.domainTag }}
                                 </div>
                             </div>
                             <div class="d-column">
                                 <div *ngIf="subdomain.status"
-                                    [ngClass]="{ 'active': subdomain.status == 'Active', 'inactive': subdomain.status != 'Active' }"
+                                    [ngClass]="{ 'active': subdomain.status == statusTypeEnum.Active, 'inactive': subdomain.status == statusTypeEnum.Inactive }"
                                     class="status">
                                     {{ subdomain.status }}
                                 </div>
                                 <!-- <div *ngIf="domain.status"
-                                    [ngClass]="{ 'active': domain.status == 'Active', 'inactive': domain.status != 'Active' }"
+                                    [ngClass]="{ 'active': domain.status == statusTypeEnum.Active, 'inactive': domain.status == statusTypeEnum.Inactive }"
                                     class="status">
                                     {{ domain.status }}
                                 </div> -->
@@ -175,7 +177,7 @@
                 <ng-container *ngIf="!domains || (domains | searchText:searchText:'domain')?.length == 0"
                     class="domain">
                     <p class="text-center light">
-                        No records found.
+                        {{ isLoading ? 'Loading...' : 'No records found.'}}
                     </p>
                 </ng-container>
             </div>

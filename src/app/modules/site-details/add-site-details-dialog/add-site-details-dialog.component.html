@@ -8,14 +8,14 @@
     <mat-form-field>
       <mat-label>Domain Tag</mat-label>
       <mat-select [(ngModel)]="data.domainTag">
-        <mat-option value="Primary">
-          Primary
+        <mat-option [value]="domainTagTypeEnum.PRIMARY">
+          {{domainTagTypeEnum.PRIMARY}}
         </mat-option>
-        <mat-option value="Staging">
-          Staging
+        <mat-option [value]="domainTagTypeEnum.STAGING">
+          {{domainTagTypeEnum.STAGING}}
         </mat-option>
-        <mat-option value="Add-on">
-          Add-on
+        <mat-option [value]="domainTagTypeEnum.ADDON">
+          {{domainTagTypeEnum.ADDON}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -35,14 +35,14 @@
       <mat-form-field>
         <mat-label>Subdomain Tag</mat-label>
         <mat-select [(ngModel)]="subdomain.domainTag">
-          <mat-option value="Primary">
-            Primary
+          <mat-option [value]="domainTagTypeEnum.PRIMARY">
+            {{domainTagTypeEnum.PRIMARY}}
           </mat-option>
-          <mat-option value="Staging">
-            Staging
+          <mat-option [value]="domainTagTypeEnum.STAGING">
+            {{domainTagTypeEnum.STAGING}}
           </mat-option>
-          <mat-option value="Add-on">
-            Add-on
+          <mat-option [value]="domainTagTypeEnum.ADDON">
+            {{domainTagTypeEnum.ADDON}}
           </mat-option>
         </mat-select>
       </mat-form-field>
